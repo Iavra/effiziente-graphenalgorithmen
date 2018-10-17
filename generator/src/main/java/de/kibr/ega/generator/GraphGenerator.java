@@ -4,7 +4,7 @@ import de.kibr.ega.core.graph.Graph;
 import de.kibr.ega.core.graph.GraphEdge;
 import de.kibr.ega.core.graph.GraphNode;
 import de.kibr.ega.core.graph.Position;
-import de.kibr.ega.core.util.CollectionUtil;
+import de.kibr.ega.generator.util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,10 +13,10 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class GraphBuilder {
+public class GraphGenerator {
     private final Supplier<String> idBuilder;
 
-    public GraphBuilder(Supplier<String> idBuilder) {
+    public GraphGenerator(Supplier<String> idBuilder) {
         this.idBuilder = idBuilder;
     }
 

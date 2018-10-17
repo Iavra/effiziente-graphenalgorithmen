@@ -1,4 +1,4 @@
-package de.kibr.ega.core.util;
+package de.kibr.ega.generator.util;
 
 import org.javatuples.Pair;
 

@@ -1,5 +1,9 @@
-package de.kibr.ega.core.graph;
+package de.kibr.ega.generator;
 
+import de.kibr.ega.core.graph.Graph;
+import de.kibr.ega.core.graph.GraphEdge;
+import de.kibr.ega.core.graph.GraphNode;
+import de.kibr.ega.core.graph.Position;
 import de.kibr.ega.core.util.CollectionUtil;
 
 import java.util.ArrayList;

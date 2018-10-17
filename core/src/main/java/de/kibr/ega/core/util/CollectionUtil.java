@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class CollectionUtil {
+    private CollectionUtil() {}
+
     public static <T> Stream<Pair<T, T>> getAllPermutations(Collection<T> collection) {
         return collection.stream().flatMap(a -> collection.stream().map(b -> new Pair<>(a, b)));
     }

@@ -1,18 +1,20 @@
 package de.kibr.ega.core.graph;
 
 import de.kibr.ega.core.util.CollectionUtil;
-import de.kibr.ega.core.util.IdBuilder;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-// note: number of edges in maximal planar graph = 3 * number of vertices - 6
-// given there are at least 3 vertices
 public class GraphBuilder {
-    private IdBuilder idBuilder = new IdBuilder();
+    private final Supplier<String> idBuilder;
+
+    public GraphBuilder(Supplier<String> idBuilder) {
+        this.idBuilder = idBuilder;
+    }
 
     public Graph buildGraph(int numNodes, int maxCapacity) {
         Graph.Builder graphBuilder = new Graph.Builder();

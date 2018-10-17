@@ -10,10 +10,8 @@ public class CollectionUtil {
     private CollectionUtil() {}
 
     public static <T> Stream<Pair<T, T>> getAllPermutations(Collection<T> collection) {
-        return collection.stream().flatMap(a -> collection.stream().map(b -> new Pair<>(a, b)));
-    }
-
-    public static <T> Stream<Pair<T, T>> getAllPermutationsWithoutDuplicates(Collection<T> collection) {
-        return getAllPermutations(collection).filter(pair -> !Objects.equals(pair.getValue0(), pair.getValue1()));
+        return collection.stream()
+                .flatMap(a -> collection.stream().map(b -> new Pair<>(a, b)))
+                .filter(pair -> !Objects.equals(pair.getValue0(), pair.getValue1()));
     }
 }

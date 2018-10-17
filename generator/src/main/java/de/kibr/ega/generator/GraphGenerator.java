@@ -5,6 +5,7 @@ import de.kibr.ega.core.graph.GraphEdge;
 import de.kibr.ega.core.graph.GraphNode;
 import de.kibr.ega.core.graph.Position;
 import de.kibr.ega.generator.util.CollectionUtil;
+import de.kibr.ega.generator.util.IdBuilder;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,7 +25,7 @@ public class GraphGenerator {
         Graph.Builder graphBuilder = new Graph.Builder();
         List<GraphNode> nodes = buildRandomNodes(numNodes);
         nodes.forEach(graphBuilder::node);
-        CollectionUtil.getAllPermutationsWithoutDuplicates(nodes)
+        CollectionUtil.getAllPermutations(nodes)
                 .map(pair -> new GraphEdge(pair.getValue0(), pair.getValue1()))
                 .sorted(Comparator.comparing(GraphEdge::length))
                 .collect(ArrayList::new, this::addEdgeToListIfItDoesntIntersect, ArrayList::addAll)

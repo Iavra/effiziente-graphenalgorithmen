@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 public class CollectionUtilTest {
 
     @Test
-    public void combine_a_single_element_with_itself() {
+    public void do_not_combine_elements_with_themselves() {
         // given
         List<String> list = Collections.singletonList("A");
 
@@ -21,7 +21,7 @@ public class CollectionUtilTest {
         Stream<Pair<String, String>> pairs = CollectionUtil.getAllPermutations(list);
 
         // then
-        assertThat(pairs).containsExactly(new Pair<>("A", "A"));
+        assertThat(pairs).isEmpty();
     }
 
     @Test
@@ -33,26 +33,7 @@ public class CollectionUtilTest {
         Stream<Pair<String, String>> pairs = CollectionUtil.getAllPermutations(list);
 
         // then
-        assertThat(pairs).containsExactly(
-                new Pair<>("A", "A"),
-                new Pair<>("A", "B"),
-                new Pair<>("B", "A"),
-                new Pair<>("B", "B")
-        );
-    }
-
-    @Test
-    public void filter_out_self_pairs_by_calling_other_function() {
-        // given
-        List<String> list = Arrays.asList("A", "B");
-
-        // when
-        Stream<Pair<String, String>> pairs = CollectionUtil.getAllPermutationsWithoutDuplicates(list);
-
-        // then
-        assertThat(pairs).containsExactly(
-                new Pair<>("A", "B"),
-                new Pair<>("B", "A")
+        assertThat(pairs).containsExactly(new Pair<>("A", "B"), new Pair<>("B", "A")
         );
     }
 }

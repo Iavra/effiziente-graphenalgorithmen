@@ -27,6 +27,16 @@ public class GraphEdge {
     }
 
     public boolean intersects(GraphEdge other) {
+        if (start.equals(other.start) || start.equals(other.end) || end.equals(other.start) || end.equals(other.end))
+            return false;
         return inner.intersectsLine(other.inner);
+    }
+
+    @Override
+    public String toString() {
+        return "GraphEdge{" +
+                "start=" + start +
+                ", end=" + end +
+                '}';
     }
 }

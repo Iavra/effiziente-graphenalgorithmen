@@ -21,4 +21,12 @@ public class GraphNode {
     public Position getPosition() {
         return position;
     }
+
+    @Override
+    public String toString() {
+        return "GraphNode{" +
+                "id='" + id + '\'' +
+                ", position=" + position +
+                '}';
+    }
 }

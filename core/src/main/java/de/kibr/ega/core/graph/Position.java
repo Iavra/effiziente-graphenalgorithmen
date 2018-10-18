@@ -23,7 +23,15 @@ public class Position {
         return abs(sqrt(pow(x - other.x, 2) + pow(y - other.y, 2)));
     }
 
+    @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
     public static Position randomPosition() {
-        return new Position(Math.random(), Math.random());
+        return new Position(Math.random() * 100, Math.random() * 100);
     }
 }

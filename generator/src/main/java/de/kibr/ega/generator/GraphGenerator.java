@@ -46,4 +46,8 @@ public class GraphGenerator {
     private void addEdgeToListIfItDoesntIntersect(List<GraphEdge> list, GraphEdge edge) {
         if (list.stream().noneMatch(edge::intersects)) list.add(edge);
     }
+
+    public static void main(String[] args) {
+        Graph graph = new GraphGenerator(new IdBuilder()).buildGraph(3, 0);
+    }
 }

@@ -22,12 +22,13 @@ public class GraphGenerator {
 
     public Graph buildGraph(int numNodes, int maxCapacity) {
         Graph.Builder graphBuilder = new Graph.Builder();
+
         List<GraphNode> nodes = buildRandomNodes(numNodes);
         nodes.forEach(graphBuilder::node);
-        getAllPossibleEdges(nodes)
-                .sorted(Comparator.comparing(GraphEdge::length))
-                .collect(ArrayList::new, this::addEdgeToListIfItDoesntIntersect, ArrayList::addAll)
-                .forEach(graphBuilder::edge);
+
+        List<GraphEdge> edges = buildPlanarEdges(nodes);
+        edges.forEach(graphBuilder::edge);
+
         return graphBuilder.build();
     }
 
@@ -39,6 +40,12 @@ public class GraphGenerator {
 
     private GraphNode buildRandomNode() {
         return new GraphNode(idBuilder.get(), Position.randomPosition());
+    }
+
+    private ArrayList<GraphEdge> buildPlanarEdges(List<GraphNode> nodes) {
+        return getAllPossibleEdges(nodes)
+                .sorted(Comparator.comparing(GraphEdge::length))
+                .collect(ArrayList::new, this::addEdgeToListIfItDoesntIntersect, ArrayList::addAll);
     }
 
     private Stream<GraphEdge> getAllPossibleEdges(List<GraphNode> nodes) {

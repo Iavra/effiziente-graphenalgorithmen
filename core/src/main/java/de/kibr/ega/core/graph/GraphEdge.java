@@ -1,42 +1,42 @@
 package de.kibr.ega.core.graph;
 
+import org.jgrapht.graph.DefaultWeightedEdge;
+
 import java.awt.geom.Line2D;
 
-public class GraphEdge {
-    private final GraphNode start;
-    private final GraphNode end;
+import static java.lang.Math.*;
 
-    final Line2D inner;
-
-    public GraphEdge(GraphNode start, GraphNode end) {
-        this.start = start;
-        this.end = end;
-        inner = new Line2D.Double(start.inner, end.inner);
+public class GraphEdge extends DefaultWeightedEdge {
+    @Override
+    protected GraphNode getSource() {
+        return (GraphNode) super.getSource();
     }
 
-    public GraphNode getStart() {
-        return start;
-    }
-
-    public GraphNode getEnd() {
-        return end;
-    }
-
-    public double length() {
-        return start.getPosition().distanceTo(end.getPosition());
+    @Override
+    protected GraphNode getTarget() {
+        return (GraphNode) super.getTarget();
     }
 
     public boolean intersects(GraphEdge other) {
-        if (start.equals(other.start) || start.equals(other.end) || end.equals(other.start) || end.equals(other.end))
+        if (getSource().equals(other.getSource()) ||
+                getSource().equals(other.getTarget()) ||
+                getTarget().equals(other.getSource()) ||
+                getTarget().equals(other.getTarget()))
             return false;
-        return inner.intersectsLine(other.inner);
+        return asLine().intersectsLine(other.asLine());
+    }
+
+    public double length() {
+        Line2D line = asLine();
+        return abs(sqrt(pow(line.getX1() - line.getX2(), 2) + pow(line.getY1() - line.getY2(), 2)));
+    }
+
+    private Line2D asLine() {
+        return new Line2D.Double(getSource().position, getTarget().position);
     }
 
     @Override
     public String toString() {
-        return "GraphEdge{" +
-                "start=" + start +
-                ", end=" + end +
-                '}';
+        return "GraphEdge{source=" + getSource() + ", target=" + getTarget() + ", weight=" + getWeight() + "}";
     }
 }

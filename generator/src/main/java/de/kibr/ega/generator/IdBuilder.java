@@ -1,4 +1,4 @@
-package de.kibr.ega.generator.util;
+package de.kibr.ega.generator;
 
 import java.util.function.Supplier;
 

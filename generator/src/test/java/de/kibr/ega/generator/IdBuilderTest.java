@@ -1,5 +1,6 @@
-package de.kibr.ega.generator.util;
+package de.kibr.ega.generator;
 
+import de.kibr.ega.generator.IdBuilder;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;

@@ -13,5 +13,6 @@
     <modules>
         <module>core</module>
         <module>generator</module>
+        <module>gui</module>
     </modules>
 </project>

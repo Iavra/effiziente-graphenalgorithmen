@@ -6,13 +6,4 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>core</artifactId>
-
-    <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.jgrapht/jgrapht-core -->
-        <dependency>
-            <groupId>org.jgrapht</groupId>
-            <artifactId>jgrapht-core</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-    </dependencies>
 </project>

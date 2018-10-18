@@ -1,16 +1,13 @@
 package de.kibr.ega.generator;
 
-import de.kibr.ega.core.graph.GraphEdge;
+import de.kibr.ega.core.graph.Graph;
 import de.kibr.ega.core.graph.GraphNode;
-import org.jgrapht.Graph;
-import org.jgrapht.generate.GraphGenerator;
 
 import java.util.Comparator;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class PlanarGraphGenerator implements GraphGenerator<GraphNode, GraphEdge, GraphNode> {
-    public static final String SOURCE = "s";
-    public static final String SINK = "t";
+public class PlanarGraphGenerator {
 
     private final int size;
     private final int maxCapacity;
@@ -22,29 +19,29 @@ public class PlanarGraphGenerator implements GraphGenerator<GraphNode, GraphEdge
         this.maxCapacity = maxCapacity;
     }
 
-    @Override
-    public void generateGraph(Graph<GraphNode, GraphEdge> target, Map<String, GraphNode> resultMap) {
-        populateGraphWithNodesAndAllPossibleEdges(target);
-        removeNonPlanarEdges(target);
+    public Graph generateGraph() {
+        Graph graph = new Graph();
+        generateGraphNodes(graph);
+        generateGraphEdges(graph);
         // TODO determine start/sink and add capacities (weights)
+        return graph;
     }
 
-    private void populateGraphWithNodesAndAllPossibleEdges(Graph<GraphNode, GraphEdge> target) {
-        GraphNode previousNode = null;
-        for (int i = 0; i < size; i++) {
-            GraphNode currentNode = target.addVertex();
-            if (previousNode != null) {
-                target.addEdge(previousNode, currentNode);
-                target.addEdge(currentNode, previousNode);
-            }
-            previousNode = currentNode;
-        }
+    private void generateGraphNodes(Graph graph) {
+        for (int i = 0; i < size; i++)
+            graph.addNode(new GraphNode("A", Math.random() * 100, Math.random() * 100));
     }
 
-    private void removeNonPlanarEdges(Graph<GraphNode, GraphEdge> target) {
-        target.edgeSet().stream()
-                .sorted(Comparator.comparing(GraphEdge::length).reversed())
-                .filter(e -> target.edgeSet().stream().anyMatch(e::intersects))
-                .forEach(target::removeEdge);
+    private void generateGraphEdges(Graph graph) {
+        // TODO use Delaunay triangulation
+        List<GraphNode> sortedNodes = graph.getNodes().stream().sorted(GraphNode.BY_POSITION).collect(Collectors.toList());
+    }
+
+    private List<GraphNode> sortByPosition(List<GraphNode> nodes) {
+        return nodes.stream().sorted(GraphNode.BY_POSITION).collect(Collectors.toList());
+    }
+
+    private List<List<GraphNode>> divideIntoSimpleSets(List<GraphNode> nodes) {
+
     }
 }

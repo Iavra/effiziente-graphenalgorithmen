@@ -21,15 +21,17 @@ public class GraphGenerator {
     }
 
     public Graph buildGraph(int numNodes, int maxCapacity) {
-        Graph.Builder graphBuilder = new Graph.Builder();
+        if (numNodes == 0) return Graph.EMPTY_GRAPH;
 
         List<GraphNode> nodes = buildRandomNodes(numNodes);
-        nodes.forEach(graphBuilder::node);
-
         List<GraphEdge> edges = buildPlanarEdges(nodes);
-        edges.forEach(graphBuilder::edge);
+        Graph graph = new Graph(nodes, edges);
 
-        return graphBuilder.build();
+        List<GraphNode> sortedNodes = nodes.stream().sorted(Comparator.comparingDouble(e ->
+                e.getPosition().getX() + e.getPosition().getY())).collect(Collectors.toList());
+        assignCapacities(graph, sortedNodes.get(0), sortedNodes.get(sortedNodes.size() - 1));
+
+        return graph;
     }
 
     private List<GraphNode> buildRandomNodes(int numNodes) {
@@ -57,5 +59,12 @@ public class GraphGenerator {
 
     private void addEdgeToListIfItDoesntIntersect(List<GraphEdge> list, GraphEdge edge) {
         if (list.stream().noneMatch(edge::intersects)) list.add(edge);
+    }
+
+    private void assignCapacities(Graph graph, GraphNode startNode, GraphNode endNode) {
+        // TODO: do a random cut through the graph, start and end being in separate sets
+        // TODO: get all edges belonging to the cut
+        // TODO: randomly spread max capacity between them
+        // TODO: assign each edge adjacent to those edges a capacity greater or equal
     }
 }

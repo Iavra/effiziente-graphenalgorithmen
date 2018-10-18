@@ -13,8 +13,8 @@ public class Graph {
     private final List<GraphEdge> edges;
 
     public Graph(Collection<GraphNode> nodes, Collection<GraphEdge> edges) {
-        this.nodes = Collections.unmodifiableList(new ArrayList<>(nodes));
-        this.edges = Collections.unmodifiableList(new ArrayList<>(edges));
+        this.nodes = new ArrayList<>(nodes);
+        this.edges = new ArrayList<>(edges);
     }
 
     public List<GraphNode> getNodes() {
@@ -23,24 +23,5 @@ public class Graph {
 
     public List<GraphEdge> getEdges() {
         return edges;
-    }
-
-    public static class Builder {
-        private List<GraphNode> nodes = new ArrayList<>();
-        private List<GraphEdge> edges = new ArrayList<>();
-
-        public Builder node(GraphNode node) {
-            nodes.add(node);
-            return this;
-        }
-
-        public Builder edge(GraphEdge edge) {
-            edges.add(edge);
-            return this;
-        }
-
-        public Graph build() {
-            return new Graph(nodes, edges);
-        }
     }
 }

@@ -1,10 +1,10 @@
 package de.kibr.ega.generator;
 
-import de.kibr.ega.generator.IdBuilder;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings({"squid:S00100"})
 public class IdBuilderTest {
 
     @Test

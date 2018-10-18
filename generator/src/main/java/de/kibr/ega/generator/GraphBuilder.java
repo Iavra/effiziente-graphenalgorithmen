@@ -2,15 +2,21 @@ package de.kibr.ega.generator;
 
 import de.kibr.ega.core.graph.GraphEdge;
 import de.kibr.ega.core.graph.GraphNode;
+import de.kibr.ega.core.graph.GraphWrapper;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GraphBuilder {
-    public static Graph<GraphNode, GraphEdge> buildGraph(int size, int maxCapacity) {
+    private GraphBuilder() {}
+
+    public static GraphWrapper buildGraph(int size, int maxCapacity) {
         GraphNodeBuilder nodeBuilder = new GraphNodeBuilder(new IdBuilder());
         Graph<GraphNode, GraphEdge> graph = new DirectedWeightedMultigraph<>(nodeBuilder, GraphEdge::new);
-        // TODO: needs to supply a map to capture source/sink and return it together with the graph in a wrapper
-        new PlanarGraphGenerator(size, maxCapacity).generateGraph(graph);
-        return graph;
+        Map<String, GraphNode> resultMap = new HashMap<>();
+        new PlanarGraphGenerator(size, maxCapacity).generateGraph(graph, resultMap);
+        return new GraphWrapper(graph, resultMap.get(PlanarGraphGenerator.SOURCE), resultMap.get(PlanarGraphGenerator.SINK));
     }
 }

@@ -1,13 +1,19 @@
 package de.kibr.ega.generator;
 
+import de.kibr.ega.generator.triangulate.GraphTriangulator;
 import de.kibr.ega.graph.Graph;
+import de.kibr.ega.graph.GraphEdge;
 import de.kibr.ega.graph.GraphNode;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class PlanarGraphGenerator {
+    private Supplier<String> idBuilder;
+    private GraphTriangulator triangulator;
 
     private final int size;
     private final int maxCapacity;
@@ -20,28 +26,16 @@ public class PlanarGraphGenerator {
     }
 
     public Graph generateGraph() {
-        Graph graph = new Graph();
-        generateGraphNodes(graph);
-        generateGraphEdges(graph);
+        List<GraphNode> nodes = generateGraphNodes();
+        List<GraphEdge> edges = triangulator.triangulateEdges(nodes);
         // TODO determine start/sink and add capacities (weights)
-        return graph;
+        return new Graph(nodes, edges);
     }
 
-    private void generateGraphNodes(Graph graph) {
+    private List<GraphNode> generateGraphNodes() {
+        List<GraphNode> nodes = new ArrayList<>();
         for (int i = 0; i < size; i++)
-            graph.addNode(new GraphNode("A", Math.random() * 100, Math.random() * 100));
-    }
-
-    private void generateGraphEdges(Graph graph) {
-        // TODO use Delaunay triangulation
-        List<GraphNode> sortedNodes = graph.getNodes().stream().sorted(GraphNode.BY_POSITION).collect(Collectors.toList());
-    }
-
-    private List<GraphNode> sortByPosition(List<GraphNode> nodes) {
-        return nodes.stream().sorted(GraphNode.BY_POSITION).collect(Collectors.toList());
-    }
-
-    private List<List<GraphNode>> divideIntoSimpleSets(List<GraphNode> nodes) {
-
+            nodes.add(new GraphNode(idBuilder.get(), Math.random() * 100, Math.random() * 100));
+        return nodes;
     }
 }

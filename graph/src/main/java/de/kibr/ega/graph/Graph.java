@@ -1,4 +1,4 @@
-package de.kibr.ega.core.graph;
+package de.kibr.ega.graph;
 
 import java.util.Collections;
 import java.util.HashSet;

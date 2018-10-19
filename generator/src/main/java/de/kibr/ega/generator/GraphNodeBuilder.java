@@ -1,6 +1,6 @@
 package de.kibr.ega.generator;
 
-import de.kibr.ega.core.graph.GraphNode;
+import de.kibr.ega.graph.GraphNode;
 
 import java.util.function.Supplier;
 

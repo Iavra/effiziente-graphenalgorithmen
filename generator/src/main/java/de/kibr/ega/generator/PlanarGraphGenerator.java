@@ -1,7 +1,7 @@
 package de.kibr.ega.generator;
 
-import de.kibr.ega.core.graph.Graph;
-import de.kibr.ega.core.graph.GraphNode;
+import de.kibr.ega.graph.Graph;
+import de.kibr.ega.graph.GraphNode;
 
 import java.util.Comparator;
 import java.util.List;

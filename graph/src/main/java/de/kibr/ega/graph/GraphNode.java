@@ -1,4 +1,4 @@
-package de.kibr.ega.core.graph;
+package de.kibr.ega.graph;
 
 import java.awt.geom.Point2D;
 import java.util.Comparator;

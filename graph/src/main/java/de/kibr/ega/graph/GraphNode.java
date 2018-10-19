@@ -4,13 +4,9 @@ import java.awt.geom.Point2D;
 import java.util.Comparator;
 
 public class GraphNode {
-    public static Comparator<GraphNode> BY_POSITION = Comparator.comparing(GraphNode::getX).thenComparing(GraphNode::getY);
-
-    private final String id;
     final Point2D position;
 
-    public GraphNode(String id, double posX, double posY) {
-        this.id = id;
+    public GraphNode(double posX, double posY) {
         position = new Point2D.Double(posX, posY);
     }
 
@@ -24,6 +20,6 @@ public class GraphNode {
 
     @Override
     public String toString() {
-        return "GraphNode{id='" + id + "'" + ", position=" + position + "}";
+        return "GraphNode{x=" + getX() + ", y=" + getY() + "}";
     }
 }

@@ -22,6 +22,6 @@ public class RandomNodeGenerator implements NodeGenerator {
     }
 
     private GraphNode generateNode() {
-        return new GraphNode("TODO", Math.random() * maxWidth, Math.random() * maxHeight);
+        return new GraphNode(Math.random() * maxWidth, Math.random() * maxHeight);
     }
 }

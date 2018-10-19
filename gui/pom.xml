@@ -15,7 +15,7 @@
         </dependency>
         <dependency>
             <groupId>de.kibr.effiziente-graphenalgorithmen</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>graph</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

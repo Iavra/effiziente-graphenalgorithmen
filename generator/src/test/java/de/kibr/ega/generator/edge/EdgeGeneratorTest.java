@@ -27,10 +27,10 @@ public abstract class EdgeGeneratorTest {
 
     private List<GraphNode> createNodes() {
         return Arrays.asList(
-                new GraphNode("A", 0, 0),
-                new GraphNode("B", 1, 0),
-                new GraphNode("C", 0, 1),
-                new GraphNode("D", 1, 1)
+                new GraphNode(0, 0),
+                new GraphNode(1, 0),
+                new GraphNode(0, 1),
+                new GraphNode(1, 1)
         );
     }
 }

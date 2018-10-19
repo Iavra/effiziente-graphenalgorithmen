@@ -1,20 +1,19 @@
-package de.kibr.ega.generator.edge;
+package de.kibr.ega.generator.util;
 
 import de.kibr.ega.graph.GraphNode;
 
 import java.util.*;
 
-/**
- * Uses the Graham Scan algorithm to find all points belonging to the convex hull of a set of points in a plane.
- * Source: https://github.com/bkiers/GrahamScan
- */
-public class GrahamScan {
-    private GrahamScan() {}
+public class GraphUtil {
+    private GraphUtil() {}
 
+    /**
+     * Uses the Graham Scan algorithm, source: https://github.com/bkiers/GrahamScan
+     */
     public static List<GraphNode> findConvexHull(List<GraphNode> nodes) {
         if (nodes.size() < 3) throw new IllegalArgumentException("need 3 or more points");
         List<GraphNode> sorted = new ArrayList<>(sortByAngle(nodes));
-        if (testForCollinearity(sorted)) throw new IllegalArgumentException("all points are collinear");
+        if (areAllPointsCollinear(sorted)) throw new IllegalArgumentException("all points are collinear");
 
         Deque<GraphNode> stack = new LinkedList<>();
         stack.push(sorted.get(0));
@@ -25,7 +24,8 @@ public class GrahamScan {
             GraphNode middle = stack.pop();
             GraphNode tail = stack.peek();
 
-            switch(Turn.fromPoints(tail, middle, head)) {
+            Turn turn = Turn.fromPoints(tail, middle, head);
+            switch(turn) {
                 case COUNTER_CLOCKWISE:
                     stack.push(middle);
                     stack.push(head);
@@ -36,6 +36,8 @@ public class GrahamScan {
                 case COLLINEAR:
                     stack.push(head);
                     break;
+                default:
+                    throw new IllegalArgumentException("unknown turn: " + turn);
             }
         }
 
@@ -60,7 +62,7 @@ public class GrahamScan {
         return lowest;
     }
 
-    private static boolean testForCollinearity(List<GraphNode> nodes) {
+    private static boolean areAllPointsCollinear(List<GraphNode> nodes) {
         if (nodes.size() < 3) return true;
         GraphNode a = nodes.get(0);
         GraphNode b = nodes.get(1);
@@ -92,18 +94,6 @@ public class GrahamScan {
             double distanceB = b.distanceTo(lowest);
 
             return distanceA < distanceB ? -1 : 1;
-        }
-    }
-
-    private enum Turn {
-        CLOCKWISE, COUNTER_CLOCKWISE, COLLINEAR;
-
-        public static Turn fromPoints(GraphNode a, GraphNode b, GraphNode c) {
-            double cross = ((b.getX() - a.getX()) * (c.getY() - a.getY()))
-                    - ((b.getY() - a.getY()) * (c.getX() - a.getX()));
-            if (cross > 0) return COUNTER_CLOCKWISE;
-            if (cross < 0) return CLOCKWISE;
-            return COLLINEAR;
         }
     }
 }

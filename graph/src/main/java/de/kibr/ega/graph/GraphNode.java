@@ -18,6 +18,10 @@ public class GraphNode {
         return position.getY();
     }
 
+    public double distanceTo(GraphNode other) {
+        return position.distance(other.position);
+    }
+
     @Override
     public String toString() {
         return "GraphNode{x=" + getX() + ", y=" + getY() + "}";

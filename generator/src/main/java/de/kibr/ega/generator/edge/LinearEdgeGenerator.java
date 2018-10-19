@@ -12,10 +12,12 @@ import java.util.stream.Stream;
 /**
  * Tries to add all possible edges from shortest to longest distance, as long as there's no intersection.
  * This should be identical to the sample algorithm provided in the task description.
+ *
+ * Complexity: O(n^3), though the sort adds additional complexity, it's not strictly needed for the algorithm
  */
 public class LinearEdgeGenerator implements EdgeGenerator {
     @Override
-    public List<GraphEdge> generateEdges(Collection<GraphNode> nodes) {
+    public List<GraphEdge> generateEdges(List<GraphNode> nodes) {
         return generateAllPossibleEdges(nodes)
                 .sorted(Comparator.comparing(GraphEdge::length))
                 .collect(ArrayList::new, this::discardIntersectingEdges, ArrayList::addAll);

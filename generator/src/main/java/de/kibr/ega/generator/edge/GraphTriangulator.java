@@ -1,4 +1,4 @@
-package de.kibr.ega.generator.triangulate;
+package de.kibr.ega.generator.edge;
 
 import de.kibr.ega.graph.GraphEdge;
 import de.kibr.ega.graph.GraphNode;

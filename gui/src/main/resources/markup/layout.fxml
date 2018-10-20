@@ -2,14 +2,14 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="root" prefHeight="500" prefWidth="1000" stylesheets="/style/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.kibr.ega.gui.Controller">
+<BorderPane prefHeight="500" prefWidth="1000" stylesheets="/style/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.kibr.ega.gui.controller.MainController">
 
-    <left>
-        <fx:include source="sidebar.fxml"/>
-    </left>
+<left>
+    <fx:include source="sidebar.fxml"/>
+</left>
 
-    <center>
-        <fx:include source="graph.fxml"/>
-    </center>
+<center>
+    <fx:include fx:id="graph" source="graph.fxml"/>
+</center>
 
 </BorderPane>

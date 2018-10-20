@@ -4,7 +4,7 @@ import java.awt.geom.Line2D;
 
 import static java.lang.Math.*;
 
-public class GraphEdge {
+public class GraphEdge implements GraphElement {
     private final GraphNode source;
     private final GraphNode target;
 
@@ -34,6 +34,11 @@ public class GraphEdge {
 
     private Line2D asLine() {
         return new Line2D.Double(source.position, target.position);
+    }
+
+    @Override
+    public String getLabel() {
+        return null; // TODO
     }
 
     @Override

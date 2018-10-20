@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="sidebar" prefWidth="250" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="sidebar" prefWidth="250" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
 
     <TitledPane text="%sidebar.display.title">
 
@@ -12,31 +18,35 @@
     <TitledPane text="%sidebar.graph.title">
         <GridPane vgap="10">
             <columnConstraints>
-                <ColumnConstraints percentWidth="60" halignment="LEFT"/>
-                <ColumnConstraints percentWidth="40" halignment="RIGHT"/>
+                <ColumnConstraints halignment="LEFT" percentWidth="60" />
+                <ColumnConstraints halignment="RIGHT" percentWidth="40" />
             </columnConstraints>
-            <Label text="%sidebar.graph.triangulation.title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="0"></ChoiceBox>
-            <Label text="%sidebar.graph.numNodes.title" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-            <Spinner min="2" max="99" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <Label text="%sidebar.graph.capacity.title" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <Spinner min="0" max="999" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Label text="%sidebar.graph.triangulation.title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label text="%sidebar.graph.numNodes.title" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Spinner max="99" min="2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="%sidebar.graph.capacity.title" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Spinner max="999" min="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
     </TitledPane>
 
     <TitledPane text="%sidebar.algo.title">
         <GridPane vgap="10">
             <columnConstraints>
-                <ColumnConstraints percentWidth="60" halignment="LEFT"/>
-                <ColumnConstraints percentWidth="40" halignment="RIGHT"/>
+                <ColumnConstraints halignment="LEFT" percentWidth="60" />
+                <ColumnConstraints halignment="RIGHT" percentWidth="40" />
             </columnConstraints>
-            <Label text="%sidebar.algo.choice.title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="0"></ChoiceBox>
+            <Label text="%sidebar.algo.choice.title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="0" />
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
-    </TitledPane>
-
-    <TitledPane text="%sidebar.controls.title">
-        <fx:include source="controls.fxml"/>
     </TitledPane>
 
 </VBox>

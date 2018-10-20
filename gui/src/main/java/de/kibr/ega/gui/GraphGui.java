@@ -16,10 +16,10 @@ public class GraphGui extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        ResourceBundle bundle = ResourceBundle.getBundle("labels");
-        Parent root = FXMLLoader.load(getClass().getResource("/markup/layout.fxml"), bundle);
-        stage.setTitle(bundle.getString("application.title"));
-        stage.setScene(new Scene(root));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/markup/layout.fxml"));
+        loader.setResources(ResourceBundle.getBundle("labels"));
+        stage.setTitle(loader.getResources().getString("application.title"));
+        stage.setScene(new Scene(loader.load()));
         stage.show();
     }
 }

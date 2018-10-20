@@ -5,3 +5,10 @@
 #sidebar {
     -fx-background-color: rgb(230, 230, 230);
 }
+
+#controls {
+    -fx-padding: 5 20;
+    -fx-background-color: rgb(230, 230, 230);
+    -fx-border-width: 1 1 0;
+    -fx-border-color: rgb(200, 200, 200);
+}

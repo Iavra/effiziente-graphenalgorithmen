@@ -3,7 +3,7 @@ package de.kibr.ega.graph;
 import java.awt.geom.Point2D;
 import java.util.Comparator;
 
-public class GraphNode {
+public class GraphNode implements GraphElement {
     final Point2D position;
 
     public GraphNode(double posX, double posY) {
@@ -20,6 +20,11 @@ public class GraphNode {
 
     public double distanceTo(GraphNode other) {
         return position.distance(other.position);
+    }
+
+    @Override
+    public String getLabel() {
+        return null; // TODO
     }
 
     @Override

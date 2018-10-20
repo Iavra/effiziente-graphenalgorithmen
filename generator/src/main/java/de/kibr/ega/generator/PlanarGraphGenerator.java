@@ -9,13 +9,15 @@ import de.kibr.ega.graph.GraphNode;
 import java.util.List;
 
 public class PlanarGraphGenerator {
-    private NodeGenerator nodeGenerator;
-    private EdgeGenerator edgeGenerator;
+    private final NodeGenerator nodeGenerator;
+    private final EdgeGenerator edgeGenerator;
 
     private final int size;
     private final int maxCapacity;
 
-    public PlanarGraphGenerator(int size, int maxCapacity) {
+    public PlanarGraphGenerator(NodeGenerator nodeGenerator, EdgeGenerator edgeGenerator, int size, int maxCapacity) {
+        this.nodeGenerator = nodeGenerator;
+        this.edgeGenerator = edgeGenerator;
         if (size < 0) throw new IllegalArgumentException("size must be non-negative");
         if (maxCapacity < 0) throw new IllegalArgumentException("max capacity must be non-negative");
         this.size = size;

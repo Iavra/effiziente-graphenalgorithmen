@@ -30,4 +30,8 @@ public class Graph {
     public Set<GraphNode> getNodes() {
         return Collections.unmodifiableSet(nodes);
     }
+
+    public Set<GraphEdge> getEdges() {
+        return Collections.unmodifiableSet(edges);
+    }
 }

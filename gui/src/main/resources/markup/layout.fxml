@@ -2,7 +2,7 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="root" prefHeight="500" prefWidth="1000" stylesheets="style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.kibr.ega.gui.Controller">
+<BorderPane fx:id="root" prefHeight="500" prefWidth="1000" stylesheets="/style/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.kibr.ega.gui.Controller">
 
     <left>
         <fx:include source="sidebar.fxml"/>

@@ -13,6 +13,14 @@ public class GraphEdge {
         this.target = target;
     }
 
+    public GraphNode getSource() {
+        return source;
+    }
+
+    public GraphNode getTarget() {
+        return target;
+    }
+
     public boolean intersects(GraphEdge other) {
         if (source.equals(other.source) || source.equals(other.target) || target.equals(other.source) || target.equals(other.target))
             return false;

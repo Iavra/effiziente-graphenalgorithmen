@@ -6,6 +6,5 @@ import java.util.ResourceBundle;
 
 public class Controller {
     @FXML private ResourceBundle resources;
-
-    @FXML private int numEdges;
+    @FXML private JGraphXAdapter graph;
 }

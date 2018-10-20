@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox spacing="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <Button>
+        <graphic>
+            <FontAwesomeIconView glyphName="PLAY" glyphSize="16"/>
+        </graphic>
+    </Button>
+    <HBox>
+        <ToggleButton>
+            <graphic>
+                <FontAwesomeIconView glyphName="CLOCK_ALT" glyphSize="16"/>
+            </graphic>
+        </ToggleButton>
+        <Slider max="100" showTickLabels="true" showTickMarks="true" majorTickUnit="20"/>
+    </HBox>
+</HBox>

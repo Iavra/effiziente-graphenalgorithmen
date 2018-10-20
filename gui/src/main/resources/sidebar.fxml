@@ -7,46 +7,29 @@
 <VBox fx:id="sidebar" prefWidth="250" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
 
     <TitledPane text="%sidebar.graph.title">
-        <VBox spacing="10" disable="false">
-            <GridPane vgap="5">
-                <columnConstraints>
-                    <ColumnConstraints percentWidth="50" halignment="LEFT"/>
-                    <ColumnConstraints percentWidth="50" halignment="RIGHT"/>
-                </columnConstraints>
-                <Label text="%sidebar.graph.edges.title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <ChoiceBox fx:id="sidebarGraphEdgeSelect" GridPane.columnIndex="1" GridPane.rowIndex="0"></ChoiceBox>
-            </GridPane>
-            <Separator/>
-            <AnchorPane>
-                <HBox spacing="10">
-                    <Button>
-                        <graphic><FontAwesomeIconView glyphName="UPLOAD" size="16"/></graphic>
-                        <tooltip><Tooltip text="%sidebar.graph.controls.import"/></tooltip>
-                    </Button>
-                    <Button>
-                        <graphic><FontAwesomeIconView glyphName="RANDOM" size="16"/></graphic>
-                        <tooltip><Tooltip text="%sidebar.graph.controls.random"/></tooltip>
-                    </Button>
-                </HBox>
-                <Button AnchorPane.rightAnchor="0">
-                    <graphic><FontAwesomeIconView glyphName="DOWNLOAD" size="16"/></graphic>
-                    <tooltip><Tooltip text="%sidebar.graph.controls.export"/></tooltip>
-                </Button>
-            </AnchorPane>
-        </VBox>
+        <GridPane vgap="10">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="60" halignment="LEFT"/>
+                <ColumnConstraints percentWidth="40" halignment="RIGHT"/>
+            </columnConstraints>
+            <Label text="%sidebar.graph.triangulation.title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="0"></ChoiceBox>
+            <Label text="%sidebar.graph.numNodes.title" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Spinner min="2" max="99" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label text="%sidebar.graph.capacity.title" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Spinner min="0" max="999" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        </GridPane>
     </TitledPane>
 
     <TitledPane text="%sidebar.algo.title">
-        <VBox spacing="10" disable="false">
-            <GridPane vgap="5">
-                <columnConstraints>
-                    <ColumnConstraints percentWidth="50" halignment="LEFT"/>
-                    <ColumnConstraints percentWidth="50" halignment="RIGHT"/>
-                </columnConstraints>
-                <Label text="%sidebar.algo.choice.title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <ChoiceBox fx:id="sidebarAlgoSelect" GridPane.columnIndex="1" GridPane.rowIndex="0"></ChoiceBox>
-            </GridPane>
-        </VBox>
+        <GridPane vgap="10">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="60" halignment="LEFT"/>
+                <ColumnConstraints percentWidth="40" halignment="RIGHT"/>
+            </columnConstraints>
+            <Label text="%sidebar.algo.choice.title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="0"></ChoiceBox>
+        </GridPane>
     </TitledPane>
 
     <TitledPane text="%sidebar.controls.title">

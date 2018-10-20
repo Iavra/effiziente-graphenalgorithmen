@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="sidebar" prefWidth="250" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+
+    <TitledPane text="%sidebar.graph.title">
+        <VBox spacing="10" disable="false">
+            <GridPane vgap="5">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" halignment="LEFT"/>
+                    <ColumnConstraints percentWidth="50" halignment="RIGHT"/>
+                </columnConstraints>
+                <Label text="%sidebar.graph.edges.title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <ChoiceBox fx:id="sidebarGraphEdgeSelect" GridPane.columnIndex="1" GridPane.rowIndex="0"></ChoiceBox>
+            </GridPane>
+            <Separator/>
+            <AnchorPane>
+                <HBox spacing="10">
+                    <Button>
+                        <graphic><FontAwesomeIconView glyphName="UPLOAD" size="16"/></graphic>
+                        <tooltip><Tooltip text="%sidebar.graph.controls.import"/></tooltip>
+                    </Button>
+                    <Button>
+                        <graphic><FontAwesomeIconView glyphName="RANDOM" size="16"/></graphic>
+                        <tooltip><Tooltip text="%sidebar.graph.controls.random"/></tooltip>
+                    </Button>
+                </HBox>
+                <Button AnchorPane.rightAnchor="0">
+                    <graphic><FontAwesomeIconView glyphName="DOWNLOAD" size="16"/></graphic>
+                    <tooltip><Tooltip text="%sidebar.graph.controls.export"/></tooltip>
+                </Button>
+            </AnchorPane>
+        </VBox>
+    </TitledPane>
+
+    <TitledPane text="%sidebar.algo.title">
+        <VBox spacing="10" disable="false">
+            <GridPane vgap="5">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" halignment="LEFT"/>
+                    <ColumnConstraints percentWidth="50" halignment="RIGHT"/>
+                </columnConstraints>
+                <Label text="%sidebar.algo.choice.title" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <ChoiceBox fx:id="sidebarAlgoSelect" GridPane.columnIndex="1" GridPane.rowIndex="0"></ChoiceBox>
+            </GridPane>
+        </VBox>
+    </TitledPane>
+
+    <TitledPane text="%sidebar.controls.title">
+
+    </TitledPane>
+
+</VBox>

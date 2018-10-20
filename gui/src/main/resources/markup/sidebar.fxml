@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="sidebar" prefWidth="250" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="sidebar" prefWidth="250" fx:controller="de.kibr.ega.gui.controller.SettingsController"
+      xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
 
     <TitledPane text="%sidebar.display.title">
 
@@ -21,12 +22,16 @@
                 <ColumnConstraints halignment="LEFT" percentWidth="60" />
                 <ColumnConstraints halignment="RIGHT" percentWidth="40" />
             </columnConstraints>
-            <Label text="%sidebar.graph.triangulation.title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label text="%sidebar.graph.generator.nodes.title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label text="%sidebar.graph.numNodes.title" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Spinner max="99" min="2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="%sidebar.graph.capacity.title" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Spinner max="999" min="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="%sidebar.graph.generator.edges.title" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="%sidebar.graph.generator.capacity.title" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="%sidebar.graph.numNodes.title" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Spinner max="99" min="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="%sidebar.graph.capacity.title" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <Spinner max="999" min="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          <rowConstraints>
             <RowConstraints />
             <RowConstraints />

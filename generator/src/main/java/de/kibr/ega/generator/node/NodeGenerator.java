@@ -5,5 +5,5 @@ import de.kibr.ega.graph.GraphNode;
 import java.util.List;
 
 public interface NodeGenerator {
-    List<GraphNode> generateNodes(int size);
+    List<GraphNode> generateNodes(int size, double maxWidth, double maxHeight);
 }

@@ -1,34 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.embed.swing.SwingNode?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:controller="de.kibr.ega.gui.controller.GraphController"
-            xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
-    <center>
-        <SwingNode fx:id="graphContainer"/>
-    </center>
+<?import javafx.geometry.Insets?>
+<StackPane fx:controller="de.kibr.ega.gui.controller.GraphController"
+           xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
 
-    <bottom>
-        <HBox alignment="CENTER">
-        <HBox id="controls" spacing="10">
-            <Button>
-                <graphic>
-                    <FontAwesomeIconView glyphName="PLAY" glyphSize="16" />
-                </graphic>
-            </Button>
-            <ToggleButton>
-                <graphic>
-                    <FontAwesomeIconView glyphName="CLOCK_ALT" glyphSize="16" />
-                </graphic>
-            </ToggleButton>
-            <Slider majorTickUnit="20" max="100" showTickLabels="true" showTickMarks="true" />
-        </HBox>
-        </HBox>
-    </bottom>
-</BorderPane>
+        <SwingNode fx:id="graphContainer" style="margin: 10; ">
+                <StackPane.margin>
+                        <Insets top="10" bottom="10" left="10" right="10"/>
+                </StackPane.margin>
+        </SwingNode>
+
+</StackPane>

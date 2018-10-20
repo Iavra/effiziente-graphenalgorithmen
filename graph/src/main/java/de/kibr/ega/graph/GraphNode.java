@@ -1,7 +1,6 @@
 package de.kibr.ega.graph;
 
 import java.awt.geom.Point2D;
-import java.util.Comparator;
 
 public class GraphNode implements GraphElement {
     final Point2D position;

@@ -1,7 +1,6 @@
 package de.kibr.ega.gui;
 
 import com.google.common.collect.HashBiMap;
-import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxICell;
 import com.mxgraph.util.mxConstants;
@@ -27,19 +26,20 @@ public class JGraphXAdapter extends mxGraph {
     Map<GraphEdge, mxICell> edgeMapping = HashBiMap.create();
 
     public JGraphXAdapter() {
-        setLayout();
         createStyles();
     }
 
     public void setGraph(Graph graph) {
+        // TODO: clear mappings and graph
         this.graph = Objects.requireNonNull(graph);
         graph.getNodes().forEach(this::addNode);
         graph.getEdges().forEach(this::addEdge);
+        setLayout();
     }
 
     private void addNode(GraphNode node) {
         updateModel(() -> {
-            mxICell cell = (mxICell) insertVertex(defaultParent, null,
+            mxICell cell = (mxICell) insertVertex(getDefaultParent(), null,
                     node, node.getX(), node.getY(), 0, 0, STYLE_NODE);
             updateCellSize(cell);
             nodeMapping.put(node, cell);
@@ -51,7 +51,7 @@ public class JGraphXAdapter extends mxGraph {
             mxICell source = nodeMapping.get(edge.getSource());
             mxICell target = nodeMapping.get(edge.getTarget());
             if (source == null || target == null) return;
-            mxICell cell = (mxICell) insertEdge(defaultParent, null,
+            mxICell cell = (mxICell) insertEdge(getDefaultParent(), null,
                     edge, source, target, STYLE_EDGE);
             updateCellSize(cell);
             edgeMapping.put(edge, cell);
@@ -67,7 +67,7 @@ public class JGraphXAdapter extends mxGraph {
         }
     }
     private void setLayout() {
-        // new mxParallelEdgeLayout(this).execute(defaultParent);
+        new mxParallelEdgeLayout(this, 10).execute(getDefaultParent());
     }
 
     private void createStyles() {
@@ -91,7 +91,7 @@ public class JGraphXAdapter extends mxGraph {
     private Map<String, Object> createEdgeStyle() {
         Map<String, Object> style = new HashMap<>();
         style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
-        style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
+        style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_BLOCK);
         style.put(mxConstants.STYLE_VERTICAL_ALIGN, mxConstants.ALIGN_MIDDLE);
         style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
         style.put(mxConstants.STYLE_STROKECOLOR, "#6482B9");

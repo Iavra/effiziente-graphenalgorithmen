@@ -1,9 +1,9 @@
 package de.kibr.ega.graph;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Graph {
     private Set<GraphNode> nodes;
@@ -33,5 +33,29 @@ public class Graph {
 
     public Set<GraphEdge> getEdges() {
         return Collections.unmodifiableSet(edges);
+    }
+
+    public List<GraphEdge> getEdgesFrom(GraphNode node) {
+        return edges.stream()
+                .filter(e -> e.getSource().equals(node)).collect(Collectors.toList());
+    }
+
+    public List<GraphEdge> getEdgesTo(GraphNode node) {
+        return edges.stream()
+                .filter(e -> e.getTarget().equals(node)).collect(Collectors.toList());
+    }
+
+    public Optional<GraphEdge> getEdge(GraphNode source, GraphNode target) {
+        return edges.stream()
+                .filter(e -> e.getSource().equals(source) && e.getTarget().equals(target))
+                .findFirst();
+    }
+
+    public GraphNode getSource() {
+        return null; // TODO
+    }
+
+    public GraphNode getSink() {
+        return null; // TODO
     }
 }

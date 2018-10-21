@@ -1,7 +1,7 @@
 package de.kibr.ega.generator.node;
 
-import de.kibr.ega.core.graph.Position;
+import de.kibr.ega.core.graph.GraphNode;
 
 public interface NodeGenerator {
-    Position[] generateNodes(int numNodes);
+    GraphNode[] generateNodes(int numNodes);
 }

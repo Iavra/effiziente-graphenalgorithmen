@@ -1,7 +1,7 @@
 package de.kibr.ega.generator.graph;
 
 import de.kibr.ega.core.graph.Graph;
-import de.kibr.ega.core.graph.Position;
+import de.kibr.ega.core.graph.GraphNode;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,15 +12,15 @@ import java.util.stream.Collectors;
  */
 public class AdjacencyMatrixGraph implements Graph {
     private final int[][] matrix;
-    private final Position[] positions;
+    private final GraphNode[] nodes;
     private final int size;
     private final int source;
     private final int sink;
 
-    public AdjacencyMatrixGraph(Position[] nodes, int source, int sink) {
-        size = nodes.length;
-        positions = nodes;
-        matrix = new int[size][size];
+    public AdjacencyMatrixGraph(GraphNode[] nodes, int source, int sink) {
+        this.size = nodes.length;
+        this.nodes = nodes;
+        this.matrix = new int[size][size];
         this.source = source;
         this.sink = sink;
         validateNode(source);
@@ -43,12 +43,6 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     @Override
-    public List<Integer> adjacent(int node) {
-        validateNode(node);
-        return Arrays.stream(matrix[node]).filter(i -> i > 0).boxed().collect(Collectors.toList());
-    }
-
-    @Override
     public int capacity(int from, int to) {
         validateNode(from);
         validateNode(to);
@@ -56,9 +50,9 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     @Override
-    public Position position(int node) {
+    public GraphNode node(int node) {
         validateNode(node);
-        return positions[node];
+        return nodes[node];
     }
 
     private void validateNode(int node) {

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Text?>
-
-<HBox id="controls" spacing="10" fx:controller="de.kibr.ega.gui.controller.ControlsController"
-      xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
-    <Text text="controls"/>
-</HBox>

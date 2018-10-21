@@ -11,8 +11,6 @@
     </properties>
 
     <modules>
-        <module>graph</module>
-        <module>generator</module>
-        <module>gui</module>
+        <module>core</module>
     </modules>
 </project>

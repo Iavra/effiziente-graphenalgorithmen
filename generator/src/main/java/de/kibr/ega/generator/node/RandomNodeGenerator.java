@@ -5,15 +5,19 @@ import de.kibr.ega.graph.GraphNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomNodeGenerator implements NodeGenerator {
+public class RandomNodeGenerator extends BaseNodeGenerator {
+    public RandomNodeGenerator(double xMax, double yMax) {
+        super(xMax, yMax);
+    }
+
     @Override
-    public List<GraphNode> generateNodes(int size, double maxWidth, double maxHeight) {
+    public List<GraphNode> generateNodes(int size) {
         List<GraphNode> nodes = new ArrayList<>();
-        for (int i = 0; i < size; i++) nodes.add(generateNode(maxWidth, maxHeight));
+        for (int i = 0; i < size; i++) nodes.add(generateNode());
         return nodes;
     }
 
-    private GraphNode generateNode(double maxWidth, double maxHeight) {
-        return new GraphNode(Math.random() * maxWidth, Math.random() * maxHeight);
+    private GraphNode generateNode() {
+        return new GraphNode(Math.random() * xMax, Math.random() * yMax);
     }
 }

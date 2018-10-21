@@ -36,11 +36,10 @@ public class GraphController implements Initializable {
     }
 
     private void generateGraph() {
-        NodeGenerator nodeGenerator = new RandomNodeGenerator();
+        NodeGenerator nodeGenerator = new RandomNodeGenerator(100, 100);
         EdgeGenerator edgeGenerator = new LinearEdgeGenerator();
-        CapacityGenerator capacityGenerator = new SourceCutCapacityGenerator();
-        Graph graph = new GraphGenerator(
-                nodeGenerator, edgeGenerator, capacityGenerator, 500, 500, 3, 0).generateGraph();
+        CapacityGenerator capacityGenerator = new SourceCutCapacityGenerator(0);
+        Graph graph = new GraphGenerator(nodeGenerator, edgeGenerator, capacityGenerator).generateGraph(3);
         adapter.setGraph(graph);
     }
 }

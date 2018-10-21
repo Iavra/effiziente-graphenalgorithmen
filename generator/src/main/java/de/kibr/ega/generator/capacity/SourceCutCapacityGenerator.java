@@ -5,13 +5,16 @@ import de.kibr.ega.graph.GraphEdge;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
-public class SourceCutCapacityGenerator implements CapacityGenerator {
+public class SourceCutCapacityGenerator extends BaseCapacityGenerator {
     private static final Random RANDOM = new Random();
 
+    public SourceCutCapacityGenerator(int maxCapacity) {
+        super(maxCapacity);
+    }
+
     @Override
-    public void setCapacities(Graph graph, int maxCapacity) {
+    public void setCapacities(Graph graph) {
         List<GraphEdge> edges = graph.getEdgesFrom(graph.getSource());
         int[] capacities = splitRandomly(maxCapacity, edges.size());
         for (int i = 0; i < edges.size(); i++)

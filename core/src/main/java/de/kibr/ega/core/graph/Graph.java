@@ -12,4 +12,5 @@ public interface Graph {
 
     List<Integer> adjacent(int node);
     int capacity(int from, int to);
+    Position position(int node);
 }

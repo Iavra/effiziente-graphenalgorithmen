@@ -10,21 +10,21 @@ import java.util.Queue;
 public class GraphTraversal {
     private GraphTraversal() {}
 
-    public static boolean depthFirst(Graph graph, int[] result) {
-        boolean[] visited = new boolean[graph.size()];
+    public static boolean depthFirst(int[][] graph, int source, int sink, int[] result) {
+        int size = graph.length;
+        boolean[] visited = new boolean[size];
         Deque<Integer> stack = new LinkedList<>();
 
-        int source = graph.source();
         result[source] = -1;
         visited[source] = true;
         stack.push(source);
 
         while (!stack.isEmpty()) {
             int current = stack.pop();
-            for (int neighbor : graph.adjacent(current)) {
-                if (!visited[neighbor] && graph.capacity(current, neighbor) > 0) {
+            for (int neighbor = 0; neighbor < size; neighbor++) {
+                if (!visited[neighbor] && graph[current][neighbor] > 0) {
                     result[neighbor] = current;
-                    if (neighbor == graph.sink()) return true;
+                    if (neighbor == sink) return true;
                     stack.push(neighbor);
                     visited[neighbor] = true;
                 }
@@ -34,21 +34,21 @@ public class GraphTraversal {
         return false;
     }
 
-    public static boolean breadthFirst(Graph graph, int[] result) {
-        boolean[] visited = new boolean[graph.size()];
+    public static boolean breadthFirst(int[][] graph, int source, int sink, int[] result) {
+        int size = graph.length;
+        boolean[] visited = new boolean[size];
         Queue<Integer> queue = new LinkedList<>();
 
-        int source = graph.source();
         result[source] = -1;
         visited[source] = true;
         queue.add(source);
 
         while (!queue.isEmpty()) {
             int current = queue.poll();
-            for (int neighbor : graph.adjacent(current)) {
-                if (!visited[neighbor] && graph.capacity(current, neighbor) > 0) {
+            for (int neighbor = 0; neighbor < size; neighbor++) {
+                if (!visited[neighbor] && graph[current][neighbor] > 0) {
                     result[neighbor] = current;
-                    if (neighbor == graph.sink()) return true;
+                    if (neighbor == sink) return true;
                     queue.add(neighbor);
                     visited[neighbor] = true;
                 }

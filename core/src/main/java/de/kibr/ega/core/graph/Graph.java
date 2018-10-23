@@ -10,4 +10,5 @@ public interface Graph {
 
     int capacity(int from, int to);
     GraphNode node(int node);
+    GraphEdge edge(int from, int to);
 }

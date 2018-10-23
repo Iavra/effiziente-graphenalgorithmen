@@ -8,7 +8,7 @@ public class GoldbergTarjanAlgorithm extends BaseAlgorithm {
     }
 
     @Override
-    public boolean update() {
+    public boolean doUpdate() {
         return false; // TODO
     }
 }

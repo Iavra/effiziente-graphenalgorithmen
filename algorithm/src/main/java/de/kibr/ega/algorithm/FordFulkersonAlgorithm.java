@@ -17,7 +17,7 @@ public class FordFulkersonAlgorithm extends BaseAlgorithm {
     }
 
     @Override
-    public boolean update() {
+    public boolean doUpdate() {
         int[] path = new int[rGraph.length];
         if (findPath(path)) {
             int pathFlow = Integer.MAX_VALUE;

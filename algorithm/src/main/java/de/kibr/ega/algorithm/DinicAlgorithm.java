@@ -8,7 +8,7 @@ public class DinicAlgorithm extends BaseAlgorithm {
     }
 
     @Override
-    public boolean update() {
+    public boolean doUpdate() {
         return false; // TODO
     }
 }

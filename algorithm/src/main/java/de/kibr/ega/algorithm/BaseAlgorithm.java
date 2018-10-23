@@ -3,14 +3,22 @@ package de.kibr.ega.algorithm;
 import de.kibr.ega.core.graph.Graph;
 
 public abstract class BaseAlgorithm implements Algorithm {
-    protected int maxFlow = 0;
-    protected final int source;
-    protected final int sink;
+    int maxFlow = 0;
+    final int source;
+    final int sink;
 
     BaseAlgorithm(Graph graph) {
         this.source = graph.source();
         this.sink = graph.sink();
     }
+
+    @Override
+    public boolean update() {
+        if (source == sink) return true;
+        return doUpdate();
+    }
+
+    abstract boolean doUpdate();
 
     @Override
     public int maxFlow() {

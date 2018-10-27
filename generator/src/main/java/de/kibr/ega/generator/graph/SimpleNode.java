@@ -1,12 +1,12 @@
 package de.kibr.ega.generator.graph;
 
-import de.kibr.ega.core.graph.GraphNode;
+import de.kibr.ega.core.graph.Node;
 
-public class SimpleGraphNode implements GraphNode {
+public class SimpleNode implements Node {
     private final double x;
     private final double y;
 
-    public SimpleGraphNode(double x, double y) {
+    public SimpleNode(double x, double y) {
         this.x = x;
         this.y = y;
     }

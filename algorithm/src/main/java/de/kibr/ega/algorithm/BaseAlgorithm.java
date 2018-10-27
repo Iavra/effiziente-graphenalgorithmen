@@ -30,7 +30,7 @@ public abstract class BaseAlgorithm implements Algorithm {
         int[][] matrix = new int[size][size];
         for (int v = 0; v < size; v++)
             for (int w = 0; w < size; w++)
-                matrix[v][w] = graph.capacity(v, w);
+                matrix[v][w] = graph.edge(v, w).capacity();
         return matrix;
     }
 }

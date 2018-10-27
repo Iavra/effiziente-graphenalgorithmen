@@ -1,6 +1,6 @@
 package de.kibr.ega.core.graph;
 
-public interface GraphNode {
+public interface Node {
     double x();
     double y();
 }

@@ -1,9 +1,9 @@
 package de.kibr.ega.generator.node;
 
-import de.kibr.ega.core.graph.GraphNode;
+import de.kibr.ega.core.graph.Node;
 
 import java.util.List;
 
 public interface NodeGenerator {
-    List<GraphNode> generateNodes(int numNodes);
+    List<Node> generateNodes(int numNodes);
 }

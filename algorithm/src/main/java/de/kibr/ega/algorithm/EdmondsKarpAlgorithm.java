@@ -13,6 +13,10 @@ public class EdmondsKarpAlgorithm extends FordFulkersonAlgorithm {
         super(graph);
     }
 
+    /**
+     * BFS: Explores all direct neighbors of a node, starting from s, and follows all
+     * available paths in parallel, until they all end or t has been found.
+     */
     @Override
     protected boolean findPath(int[] path) {
         int size = rGraph.length;

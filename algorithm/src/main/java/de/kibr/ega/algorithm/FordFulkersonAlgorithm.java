@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * Flooding available paths using DFS
  */
 public class FordFulkersonAlgorithm extends BaseAlgorithm {
-    protected final int[][] rGraph;
+    final int[][] rGraph;
 
     public FordFulkersonAlgorithm(Graph graph) {
         super(graph);
@@ -36,6 +36,10 @@ public class FordFulkersonAlgorithm extends BaseAlgorithm {
         return true;
     }
 
+    /**
+     * DFS: Outgoing from s, follows each path to the end, backtracking afterwards,
+     * either until t has been found or all available paths have been explored.
+     */
     protected boolean findPath(int[] path) {
         int size = rGraph.length;
         boolean[] visited = new boolean[size];

@@ -1,27 +1,26 @@
 package de.kibr.ega.generator.graph;
 
 import de.kibr.ega.core.graph.Graph;
-import de.kibr.ega.core.graph.GraphEdge;
-import de.kibr.ega.core.graph.GraphNode;
+import de.kibr.ega.core.graph.Edge;
+import de.kibr.ega.core.graph.Node;
 
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Uses an adjacency matrix to store edges and a separate array for positions.
  */
 public class AdjacencyMatrixGraph implements Graph {
-    private final GraphEdge[][] matrix;
-    private final GraphNode[] nodes;
+    private final Edge[][] matrix;
+    private final Node[] nodes;
     private final int size;
     private final int source;
     private final int sink;
 
-    public AdjacencyMatrixGraph(GraphNode[] nodes, int source, int sink) {
+    public AdjacencyMatrixGraph(Node[] nodes, int source, int sink) {
         this.size = nodes.length;
         this.nodes = nodes;
-        this.matrix = new GraphEdge[size][size];
+        this.matrix = new Edge[size][size];
         this.source = source;
         this.sink = sink;
         validateNode(source);
@@ -44,18 +43,13 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     @Override
-    public int capacity(int from, int to) {
-        return edge(from, to).capacity();
-    }
-
-    @Override
-    public GraphNode node(int node) {
+    public Node node(int node) {
         validateNode(node);
         return nodes[node];
     }
 
     @Override
-    public GraphEdge edge(int from, int to) {
+    public Edge edge(int from, int to) {
         validateNode(from);
         validateNode(to);
         return matrix[from][to];

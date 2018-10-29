@@ -7,55 +7,55 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Graph {
-    private final int v;
-    private final int s;
-    private final int t;
-    private final List<List<Edge>> adj;
+    private final int size;
+    private final int source;
+    private final int sink;
+    private final List<List<Edge>> adjacent;
 
-    public Graph(int v, int s, int t) {
-        if (v < 0) throw new IllegalArgumentException("v (number of nodes) must not be negative");
-        this.v = v;
-        this.s = validate(s);
-        this.t = validate(t);
-        adj = IntStream.range(0, v)
+    public Graph(int size, int source, int sink) {
+        if (size < 0) throw new IllegalArgumentException("graph size must be non-negative");
+        this.size = size;
+        this.source = validate(source);
+        this.sink = validate(sink);
+        adjacent = IntStream.range(0, size)
                 .mapToObj(i -> new LinkedList<Edge>())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public int v() {
-        return v;
+    public int size() {
+        return size;
     }
 
-    public int s() {
-        return s;
+    public int source() {
+        return source;
     }
 
-    public int t() {
-        return t;
+    public int sink() {
+        return sink;
     }
 
-    public List<Edge> adj(int node) {
-        return adj.get(validate(node));
+    public List<Edge> adjacent(int node) {
+        return adjacent.get(validate(node));
     }
 
     public void addEdge(int from, int to, int capacity) {
         addEdge(new Edge(from, to, capacity));
     }
 
-    public void addEdge(Edge edge) {
+    private void addEdge(Edge edge) {
         validate(edge.from());
         validate(edge.to());
-        adj.get(edge.from()).add(edge);
-        adj.get(edge.to()).add(edge);
+        adjacent.get(edge.from()).add(edge);
+        adjacent.get(edge.to()).add(edge);
     }
 
     public void resetResidualFlow() {
-        adj.forEach(e -> e.forEach(Edge::resetResidualFlow));
+        adjacent.forEach(e -> e.forEach(Edge::resetResidualFlow));
     }
 
     private int validate(int node) {
-        if (node < 0 || node >= v)
-            throw new IllegalArgumentException("node outside of valid range [0, " + v + "[: " + node);
+        if (node < 0 || node >= size)
+            throw new IllegalArgumentException("node outside of valid range [0, " + size + "[: " + node);
         return node;
     }
 }

@@ -13,9 +13,9 @@ public abstract class Algorithm {
 
     Algorithm(Graph graph) {
         this.graph = graph;
-        v = graph.v();
-        s = graph.s();
-        t = graph.t();
+        v = graph.size();
+        s = graph.source();
+        t = graph.sink();
         if (s == t) done = true;
     }
 

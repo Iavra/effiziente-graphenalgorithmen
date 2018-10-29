@@ -24,7 +24,7 @@ public class EdmondsKarpAlgorithm extends FordFulkersonAlgorithm {
 
         while (!queue.isEmpty() && !visited[t]) {
             int current = queue.poll();
-            for (Edge edge : graph.adj(current)) {
+            for (Edge edge : graph.adjacent(current)) {
                 int node = edge.other(current);
                 if (!visited[node] && edge.residualCapacityTo(node) > 0) {
                     path[node] = edge;

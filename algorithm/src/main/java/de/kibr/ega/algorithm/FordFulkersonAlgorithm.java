@@ -1,65 +1,62 @@
 package de.kibr.ega.algorithm;
 
+import de.kibr.ega.core.graph.Edge;
 import de.kibr.ega.core.graph.Graph;
 
 import java.util.Deque;
 import java.util.LinkedList;
 
-/**
- * Flooding available paths using DFS
- */
-public class FordFulkersonAlgorithm extends BaseAlgorithm {
-    final int[][] rGraph;
-
+public class FordFulkersonAlgorithm extends Algorithm {
     public FordFulkersonAlgorithm(Graph graph) {
         super(graph);
-        this.rGraph = toResidualGraph(graph);
     }
 
     @Override
-    public boolean doUpdate() {
-        int[] path = new int[rGraph.length];
-        if (findPath(path)) {
-            int pathFlow = Integer.MAX_VALUE;
-            for (int w = sink; w != source; w = path[w]) {
-                int v = path[w];
-                pathFlow = Math.min(pathFlow, rGraph[v][w]);
-            }
-            for (int w = sink; w != source; w = path[w]) {
-                int v = path[w];
-                rGraph[v][w] -= pathFlow;
-                rGraph[w][v] += pathFlow;
-            }
-            maxFlow += pathFlow;
+    boolean doUpdate() {
+        Edge[] path = new Edge[v];
+        if (traverseGraph(path)) {
+            int capacity = getLowestCapacity(path);
+            augmentFlow(path, capacity);
+            maxFlow += capacity;
             return false;
-        }
-        return true;
+        } else
+            return true;
     }
 
     /**
-     * DFS: Outgoing from s, follows each path to the end, backtracking afterwards,
-     * either until t has been found or all available paths have been explored.
+     * DFS using a stack to traverse the graph
      */
-    protected boolean findPath(int[] path) {
-        int size = rGraph.length;
-        boolean[] visited = new boolean[size];
+    protected boolean traverseGraph(Edge[] path) {
         Deque<Integer> stack = new LinkedList<>();
+        boolean[] visited = new boolean[v];
 
-        visited[source] = true;
-        stack.push(source);
+        stack.push(s);
+        visited[s] = true;
 
-        while (!stack.isEmpty()) {
+        while (!stack.isEmpty() && !visited[t]) {
             int current = stack.pop();
-            for (int neighbor = 0; neighbor < size; neighbor++) {
-                if (!visited[neighbor] && rGraph[current][neighbor] > 0) {
-                    path[neighbor] = current;
-                    if (neighbor == sink) return true;
-                    stack.push(neighbor);
-                    visited[neighbor] = true;
+            for (Edge edge : graph.adj(current)) {
+                int node = edge.other(current);
+                if (!visited[node] && edge.residualCapacityTo(node) > 0) {
+                    path[node] = edge;
+                    visited[node] = true;
+                    stack.push(node);
                 }
             }
         }
 
-        return false;
+        return visited[t];
+    }
+
+    private int getLowestCapacity(Edge[] path) {
+        int capacity = Integer.MAX_VALUE;
+        for (int v = t; v != s; v = path[v].other(v))
+            capacity = Math.min(capacity, path[v].residualCapacityTo(v));
+        return capacity;
+    }
+
+    private void augmentFlow(Edge[] path, int flow) {
+        for (int v = t; v != s; v = path[v].other(v))
+            path[v].addResidualFlowTo(v, flow);
     }
 }

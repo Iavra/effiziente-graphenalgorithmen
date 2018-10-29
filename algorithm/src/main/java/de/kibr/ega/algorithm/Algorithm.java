@@ -2,8 +2,32 @@ package de.kibr.ega.algorithm;
 
 import de.kibr.ega.core.graph.Graph;
 
-// TODO: This is going to be used as the base class of all algorithms, which need to be able to proceed step-by-step
-public interface Algorithm {
-    boolean update();
-    int maxFlow();
+public abstract class Algorithm {
+    final Graph graph;
+    final int v;
+    final int s;
+    final int t;
+
+    private boolean done = false;
+    int maxFlow = 0;
+
+    Algorithm(Graph graph) {
+        this.graph = graph;
+        v = graph.v();
+        s = graph.s();
+        t = graph.t();
+        if (s == t) done = true;
+    }
+
+    public int maxFlow() {
+        return maxFlow;
+    }
+
+    boolean update() {
+        if (done) return true;
+        done = doUpdate();
+        return done;
+    }
+
+    abstract boolean doUpdate();
 }

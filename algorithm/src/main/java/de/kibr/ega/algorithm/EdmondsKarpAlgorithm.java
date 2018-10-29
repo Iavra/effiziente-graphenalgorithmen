@@ -1,43 +1,39 @@
 package de.kibr.ega.algorithm;
 
+import de.kibr.ega.core.graph.Edge;
 import de.kibr.ega.core.graph.Graph;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
- * Flooding available paths using BFS
- */
 public class EdmondsKarpAlgorithm extends FordFulkersonAlgorithm {
     public EdmondsKarpAlgorithm(Graph graph) {
         super(graph);
     }
 
     /**
-     * BFS: Explores all direct neighbors of a node, starting from s, and follows all
-     * available paths in parallel, until they all end or t has been found.
+     * BFS using a queue to traverse the graph
      */
     @Override
-    protected boolean findPath(int[] path) {
-        int size = rGraph.length;
-        boolean[] visited = new boolean[size];
+    protected boolean traverseGraph(Edge[] path) {
         Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[v];
 
-        visited[source] = true;
-        queue.add(source);
+        queue.add(s);
+        visited[s] = true;
 
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty() && !visited[t]) {
             int current = queue.poll();
-            for (int neighbor = 0; neighbor < size; neighbor++) {
-                if (!visited[neighbor] && rGraph[current][neighbor] > 0) {
-                    path[neighbor] = current;
-                    if (neighbor == sink) return true;
-                    queue.add(neighbor);
-                    visited[neighbor] = true;
+            for (Edge edge : graph.adj(current)) {
+                int node = edge.other(current);
+                if (!visited[node] && edge.residualCapacityTo(node) > 0) {
+                    path[node] = edge;
+                    visited[node] = true;
+                    queue.add(node);
                 }
             }
         }
 
-        return false;
+        return visited[t];
     }
 }

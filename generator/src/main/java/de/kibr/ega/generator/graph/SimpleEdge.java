@@ -50,8 +50,7 @@ public class SimpleEdge implements Edge {
         if      (node == from) this.flow -= flow;         // backward edge
         else if (node == to) this.flow += flow;           // forward edge
 
-        else throw new IllegalArgumentException("node not part of this edge: " + node);
-
+        else                      throw new IllegalArgumentException("node not part of this edge: " + node);
         if (this.flow < 0)        throw new IllegalArgumentException("flow is negative");
         if (this.flow > capacity) throw new IllegalArgumentException("flow exceeds capacity");
     }

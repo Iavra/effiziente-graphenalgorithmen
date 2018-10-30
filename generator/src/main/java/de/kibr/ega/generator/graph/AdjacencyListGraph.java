@@ -3,6 +3,7 @@ package de.kibr.ega.generator.graph;
 import de.kibr.ega.core.graph.Edge;
 import de.kibr.ega.core.graph.Graph;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,13 +14,15 @@ public class AdjacencyListGraph implements Graph {
     private final int size;
     private final int source;
     private final int sink;
+
+    private final List<Point2D> positions;
     private final List<List<Edge>> adjacent;
 
-    public AdjacencyListGraph(int size, int source, int sink) {
-        if (size < 0) throw new IllegalArgumentException("graph size must be non-negative");
-        this.size = size;
+    public AdjacencyListGraph(List<Point2D> nodes, int source, int sink) {
+        this.size = nodes.size();
         this.source = validate(source);
         this.sink = validate(sink);
+        positions = new ArrayList<>(nodes);
         adjacent = IntStream.range(0, size)
                 .mapToObj(i -> new LinkedList<Edge>())
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -43,6 +46,11 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public List<Edge> adjacent(int node) {
         return adjacent.get(validate(node));
+    }
+
+    @Override
+    public Point2D position(int node) {
+        return positions.get(validate(node));
     }
 
     private int validate(int node) {

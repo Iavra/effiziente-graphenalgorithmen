@@ -2,32 +2,28 @@ package de.kibr.ega.algorithm;
 
 import de.kibr.ega.core.graph.Graph;
 
-public abstract class Algorithm {
-    final Graph graph;
-    final int v;
-    final int s;
-    final int t;
+import java.util.Objects;
 
-    private boolean done = false;
+public abstract class Algorithm<T extends Algorithm.StepResult> {
+    protected final Graph graph;
+    final int source;
+    final int sink;
+
     int maxFlow = 0;
 
-    Algorithm(Graph graph) {
-        this.graph = graph;
-        v = graph.size();
-        s = graph.source();
-        t = graph.sink();
-        if (s == t) done = true;
+    Algorithm(Graph graph, int source, int sink) {
+        this.graph = Objects.requireNonNull(graph);
+        this.source = graph.validateNode(source);
+        this.sink = graph.validateNode(sink);
     }
 
-    public int maxFlow() {
+    int maxFlow() {
         return maxFlow;
     }
 
-    boolean update() {
-        if (done) return true;
-        done = doUpdate();
-        return done;
-    }
+    public abstract T update();
 
-    abstract boolean doUpdate();
+    interface StepResult {
+        StepResult FINISHED = new StepResult() {};
+    }
 }

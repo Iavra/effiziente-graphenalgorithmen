@@ -4,10 +4,11 @@ import de.kibr.ega.core.graph.Graph;
 
 import java.util.Objects;
 
-public abstract class Algorithm<T extends Algorithm.StepResult> {
-    protected final Graph graph;
+public abstract class Algorithm {
+    final Graph graph;
     final int source;
     final int sink;
+    private boolean finished = false;
 
     int maxFlow = 0;
 
@@ -17,13 +18,17 @@ public abstract class Algorithm<T extends Algorithm.StepResult> {
         this.sink = graph.validateNode(sink);
     }
 
-    int maxFlow() {
+    public void update() {
+        if (!finished) finished = doUpdate();
+    }
+
+    public int maxFlow() {
         return maxFlow;
     }
 
-    public abstract T update();
-
-    interface StepResult {
-        StepResult FINISHED = new StepResult() {};
+    public boolean finished() {
+        return finished;
     }
+
+    protected abstract boolean doUpdate();
 }

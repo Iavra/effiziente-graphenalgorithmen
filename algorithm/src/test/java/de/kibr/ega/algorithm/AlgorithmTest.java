@@ -75,7 +75,8 @@ public abstract class AlgorithmTest {
     }
 
     @Test
-    public void calculate_maximum_flow_with_cross_edges() {
+    // Graph source: https://www.youtube.com/watch?v=M4fyCfFTYV8 (last example)
+    public void test_example_graph_1() {
         // given
         Graph graph = new Graph(5);
         graph.addEdge(0, 1, 1000);
@@ -93,7 +94,8 @@ public abstract class AlgorithmTest {
     }
 
     @Test
-    public void calculate_maximum_flow_on_wikipedia_example() {
+    // Graph source: https://en.wikipedia.org/wiki/Dinic%27s_algorithm
+    public void test_example_graph_2() {
         // given
         Graph graph = new Graph(6);
         graph.addEdge(0, 1, 10);
@@ -113,13 +115,41 @@ public abstract class AlgorithmTest {
         assertThat(maxFlow).isEqualTo(19);
     }
 
+    @Test
+    // Graph source: https://www.youtube.com/watch?v=M6cm8UeeziI
+    public void test_example_graph_3() {
+        // given
+        Graph graph = new Graph(11);
+        graph.addEdge(0, 1, 5);
+        graph.addEdge(0, 2, 10);
+        graph.addEdge(0, 3, 15);
+        graph.addEdge(2, 1, 15);
+        graph.addEdge(1, 4, 10);
+        graph.addEdge(2, 5, 20);
+        graph.addEdge(3, 6, 25);
+        graph.addEdge(4, 5, 25);
+        graph.addEdge(5, 3, 5);
+        graph.addEdge(4, 7, 10);
+        graph.addEdge(5, 8, 30);
+        graph.addEdge(6, 8, 20);
+        graph.addEdge(6, 9, 10);
+        graph.addEdge(8, 4, 15);
+        graph.addEdge(7, 10, 5);
+        graph.addEdge(8, 10, 15);
+        graph.addEdge(9, 10, 10);
+
+        // when
+        int maxFlow = computeMaxFlow(graph);
+
+        // then
+        assertThat(maxFlow).isEqualTo(30);
+    }
+
     abstract Algorithm algorithm(Graph graph, int source, int sink);
 
     private int computeMaxFlow(Graph graph) {
         Algorithm algorithm = algorithm(graph, 0, graph.size() - 1);
-        Algorithm.StepResult step;
-        do step = algorithm.update();
-        while (Algorithm.StepResult.FINISHED != step);
+        while (!algorithm.finished()) algorithm.update();
         return algorithm.maxFlow();
     }
 }

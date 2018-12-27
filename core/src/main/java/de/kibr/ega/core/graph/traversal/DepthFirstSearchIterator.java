@@ -1,18 +1,21 @@
 package de.kibr.ega.core.graph.traversal;
 
-import de.kibr.ega.core.graph.Edge;
 import de.kibr.ega.core.graph.Graph;
+import de.kibr.ega.core.graph.Edge;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
-public class DepthFirstSearch implements Iterator<Edge> {
+public class DepthFirstSearchIterator implements Iterator<Edge> {
     private final Graph graph;
     private final boolean[] visited;
     private final Deque<Iterator<Edge>> stack = new LinkedList<>();
     private Edge next;
 
-    public DepthFirstSearch(Graph graph, int start) {
-        this.graph = Objects.requireNonNull(graph);
+    public DepthFirstSearchIterator(Graph graph, int start) {
+        this.graph = graph;
         visited = new boolean[graph.size()];
         visited[start] = true;
         stack.push(graph.adjacent(start).iterator());
@@ -30,6 +33,11 @@ public class DepthFirstSearch implements Iterator<Edge> {
         }
     }
 
+    @Override
+    public boolean hasNext() {
+        return next != null;
+    }
+
     private void advance() {
         Iterator<Edge> edges = stack.getFirst();
         int nextNode;
@@ -44,12 +52,7 @@ public class DepthFirstSearch implements Iterator<Edge> {
             }
             next = edges.next();
             nextNode = next.to();
-        } while (visited[nextNode] || next.residualCapacityTo(nextNode) <= 0);
+        } while (visited[nextNode] || next.residualCapacity() <= 0);
         stack.push(graph.adjacent(nextNode).iterator());
-    }
-
-    @Override
-    public boolean hasNext() {
-        return next != null;
     }
 }
